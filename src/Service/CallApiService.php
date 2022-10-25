@@ -65,8 +65,6 @@ class CallApiService
             ],]
         );
 
-        dd($response->toArray());
-
         return $response->toArray();
     }
 }

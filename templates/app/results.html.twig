@@ -1,0 +1,10 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Index
+{% endblock %}
+
+{% block body %}
+	{% for key, companie in companies %}
+		{{ dump(companie) }}
+	{% endfor %}
+{% endblock %}

@@ -15,10 +15,15 @@ class AppController extends AbstractController
      */
     public function index(CallApiService $callApiService): Response
     {
-        dd($callApiService->getApi('distance=30&latitude=49.119146&longitude=6.17602&rome_codes=M1607'));
+        $results = $callApiService->getApi('commune_id=54431&departments=54&rome_codes=M1607');
+
+        $companies = $results["companies"];
+
+        //dd($companies);
 
         return $this->render('app/index.html.twig', [
-            'controller_name' => 'AppController',
+            'results' => $results,
+            'companies' => $companies
         ]);
     }
 }
