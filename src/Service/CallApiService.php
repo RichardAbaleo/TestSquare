@@ -34,11 +34,8 @@ class CallApiService
         $this->clientSecret = $clientSecret;
         $this->grantType = $grantType;
         $this->scope = $scope;
-    }
 
-    public function getApi(string $parameters): array
-    {
-
+        // Setting up token to connect to the Api
         $token = $this->client->request(
             'POST',
             'https://entreprise.pole-emploi.fr/connexion/oauth2/access_token?realm=%2Fpartenaire',
@@ -55,13 +52,37 @@ class CallApiService
             ]
         );
 
-        $token = $token->toArray();
+        $this->token = $token->toArray();
+    }
+
+    /**
+     * Returning companies by commune_id and sector
+     *
+     * @param string $communeId
+     * @param string $sector
+     * @return array
+     */
+    public function getCompanies(string $communeId, string $sector): array
+    {
+        $specifiedCommuneId = 'commune_id=' . $communeId . '&rome_codes_keyword_search=' . $sector;
+
+        return $this->getApi($specifiedCommuneId);
+    }
+
+    /**
+     * Api Call returning response
+     *
+     * @param string $parameters
+     * @return array
+     */
+    public function getApi(string $parameters): array
+    {
 
         $response = $this->client->request(
             'GET',
             'https://api.emploi-store.fr/partenaire/labonneboite/v1/company/?' . $parameters,
             ['headers' => [
-                'Authorization' => $token["token_type"] . ' ' .  $token["access_token"]
+                'Authorization' => $this->token["token_type"] . ' ' .  $this->token["access_token"]
             ],]
         );
 

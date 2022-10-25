@@ -6,6 +6,7 @@ use App\Service\CallApiService;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use App\Repository\CityRepository;
 
 class AppController extends AbstractController
 {
@@ -13,16 +14,23 @@ class AppController extends AbstractController
     /**
      * @Route("/", name="app")
      */
-    public function index(CallApiService $callApiService): Response
+    public function index(CallApiService $callApiService, CityRepository $CityRepository): Response
     {
-        $results = $callApiService->getApi('commune_id=54431&departments=54&rome_codes=M1607');
+        $communeId = $CityRepository->findCommuneIdByCityName('Nantes');
 
-        $companies = $results["companies"];
+        $sector = 'boucher';
 
-        //dd($companies);
+        // Return an empty array if there is no results
+        // Else it returns companies
+        if (!isset($communeId[0]['commune_id']) || !isset($sector)) {
+            $companies = [];
+        } else {
+            // Setting up companies Array with the results of the Api Call
+            $results = $callApiService->getCompanies($communeId[0]['commune_id'], $sector);
+            $companies = $results["companies"];
+        }
 
         return $this->render('app/index.html.twig', [
-            'results' => $results,
             'companies' => $companies
         ]);
     }
