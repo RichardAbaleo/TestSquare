@@ -36,6 +36,7 @@ class CallApiService
         $this->scope = $scope;
 
         // Setting up token to connect to the Api
+        // https://pole-emploi.io/data/documentation/utilisation-api-pole-emploi/generer-access-token
         $token = $this->client->request(
             'POST',
             'https://entreprise.pole-emploi.fr/connexion/oauth2/access_token?realm=%2Fpartenaire',
@@ -71,13 +72,12 @@ class CallApiService
 
     /**
      * Api Call returning response
-     *
+     * https://pole-emploi.io/data/documentation/utilisation-api-pole-emploi/requeter-api
      * @param string $parameters
      * @return array
      */
     public function getApi(string $parameters): array
     {
-
         $response = $this->client->request(
             'GET',
             'https://api.emploi-store.fr/partenaire/labonneboite/v1/company/?' . $parameters,

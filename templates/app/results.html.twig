@@ -6,12 +6,25 @@
 {% block body %}
 	<div class="container">
 		<div class="h2">{{ header }}</div>
-		{% for key, companie in companies %}
-			<div class="results-{{ key }}">
-				{{ dump(companie) }}
-			</div>
-		{% endfor %}
-		<a type="button" href={{ path('app_results', {city: search['city'], sector: search['sector'], page: search['page'] - 1 } ) }}>Page précédente</a>
-		<a type="button" href={{ path('app_results', {city: search['city'], sector: search['sector'], page: search['page'] + 1 } ) }}>Page suivante</a>
+		{% if search['resultsNumber'] == 0 %}
+			{% else %}
+				{% if (search['page'] > 1) %}
+					<a type="button" href={{ path('app_results', {city: search['city'], sector: search['sector'], page: search['page'] - 1 } ) }}>Page précédente</a>
+				{% endif %}
+				{% if (search['page'] * 20) < search['resultsNumber'] %}
+					<a type="button" href={{ path('app_results', {city: search['city'], sector: search['sector'], page: search['page'] + 1 } ) }}>Page suivante</a>
+				{% endif %}
+				{% for key, companie in companies %}
+					<div class="results-{{ key }}">
+						{{ dump(companie) }}
+					</div>
+				{% endfor %}
+				{% if (search['page'] > 1) %}
+					<a type="button" href={{ path('app_results', {city: search['city'], sector: search['sector'], page: search['page'] - 1 } ) }}>Page précédente</a>
+				{% endif %}
+				{% if (search['page'] * 20) < search['resultsNumber'] %}
+					<a type="button" href={{ path('app_results', {city: search['city'], sector: search['sector'], page: search['page'] + 1 } ) }}>Page suivante</a>
+				{% endif %}
+		{% endif %}
 	</div>
 {% endblock %}
