@@ -62,9 +62,9 @@ class CallApiService
      * @param string $sector
      * @return array
      */
-    public function getCompanies(string $communeId, string $sector): array
+    public function getCompanies(string $communeId, string $sector, string $page): array
     {
-        $specifiedCommuneId = 'commune_id=' . $communeId . '&rome_codes_keyword_search=' . $sector;
+        $specifiedCommuneId = 'commune_id=' . $communeId . '&rome_codes_keyword_search=' . $sector . '&page=' . $page;
 
         return $this->getApi($specifiedCommuneId);
     }

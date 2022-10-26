@@ -4,14 +4,16 @@
 {% endblock %}
 
 {% block body %}
-
-	{{ dump(companies) }}
 	<div class="container">
 		<div class="row text-center">
-			<form>
+			<form action={{ path('app') }} method="POST">
 				<div class="mb-3">
-					<label for="exampleInputEmail1" class="form-label">Research</label>
-					<input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+					<label for="form-city" class="form-label">Ville</label>
+					<input type="text" class="form-control" name="form-city" id="form-city">
+				</div>
+				<div class="mb-3">
+					<label for="form-sector" class="form-label">Intitulé du poste</label>
+					<input type="text" class="form-control" name="form-sector">
 				</div>
 				<button type="submit" class="btn btn-primary">Submit</button>
 			</form>
