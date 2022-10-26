@@ -58,7 +58,7 @@ class AppController extends AbstractController
             if (!isset($communeId) || !isset($sector)) {
                 $companies = [];
                 $search = ['city' => '', 'sector' => '', 'page' => '', 'resultsNumber' => 0];
-                $header = 'Aucun résultat pour \'' . $sector . '\' dans la ville de \'' . $city . '\'';
+                $header = 'Aucun résultat pour \'' . $sector . '\' dans la ville de \'' . $city . '\' (nombres de token restant : ' . $limitRemainingTokens . ')';
             } else {
                 // Setting up companies Array with the results of the Api Call
                 $results = $callApiService->getCompanies($communeId, $sector, $page);

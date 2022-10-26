@@ -37,6 +37,8 @@ SET time_zone = "+00:00";
 --   `libelle` varchar(70) COLLATE utf8mb4_unicode_ci NOT NULL
 -- ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+USE `dbSquare`;
+
 --
 -- Déchargement des données de la table `city`
 --
