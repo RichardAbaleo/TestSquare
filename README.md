@@ -10,6 +10,7 @@ Test effectué sur :
 - php : >=7.2.5
 - composer d'installé
 - git d'installé
+- base de données SQL
 - identifiants de l'API "La Bonne Boite v1"
 
 ## Installation
@@ -20,7 +21,7 @@ Voici les étapes à suivre pour utiliser ce projet Symfony 5.4^ :
 
 ```
 git clone https://github.com/RichardAbaleo/TestSquare.git
-cd /TestSquare
+cd TestSquare/
 composer install
 ```
 
